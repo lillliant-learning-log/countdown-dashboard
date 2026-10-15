@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Live Countdown Dashboard</title>
+  <title>milestones.io — Live Countdown Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -1364,7 +1364,7 @@
     <!-- Top Glass Navigation Bar -->
     <header class="topbar glass">
       <div class="brand-section">
-        <h1 class="brand-title">Live Countdown Dashboard</h1>
+        <h1 class="brand-title">milestones.io</h1>
       </div>
 
       <div class="controls-section">
@@ -1462,8 +1462,8 @@
     (function () {
       "use strict";
 
-      const STORAGE_EVENTS_KEY = "milestones_io_events_v3";
-      const STORAGE_SETTINGS_KEY = "milestones_io_settings_v3";
+      const STORAGE_EVENTS_KEY = "countdown_events_v1";
+      const STORAGE_SETTINGS_KEY = "countdown_settings_v1";
 
       // Initial sample events (reduced clean set)
       const DEFAULT_EVENTS = [
@@ -1526,7 +1526,7 @@
       // Load State from localStorage
       function loadPersistedState() {
         try {
-          const savedSettings = localStorage.getItem(STORAGE_SETTINGS_KEY) || localStorage.getItem("milestones_io_settings_v2");
+          const savedSettings = localStorage.getItem(STORAGE_SETTINGS_KEY);
           if (savedSettings) {
             const parsed = JSON.parse(savedSettings);
             state.theme = parsed.theme || "warm";
@@ -1543,19 +1543,7 @@
           if (savedEvents) {
             state.events = JSON.parse(savedEvents);
           } else {
-            // Check if user has legacy data from v2
-            const v2Events = localStorage.getItem("milestones_io_events_v2");
-            if (v2Events) {
-              const parsedV2 = JSON.parse(v2Events);
-              // If v2 was just the 9 default events, reset to the new reduced sample data
-              if (Array.isArray(parsedV2) && (parsedV2.length === 9 || parsedV2.some(e => e.id === "evt-9"))) {
-                state.events = [...DEFAULT_EVENTS];
-              } else {
-                state.events = parsedV2;
-              }
-            } else {
-              state.events = [...DEFAULT_EVENTS];
-            }
+            state.events = [...DEFAULT_EVENTS];
           }
         } catch (e) {
           console.warn("Could not read events from localStorage", e);
