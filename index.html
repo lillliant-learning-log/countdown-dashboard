@@ -3,542 +3,2064 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>milestones.io | Countdown Dashboard</title>
+  <title>Live Countdown Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-      --serif: "Playfair Display", Georgia, "Times New Roman", serif;
-      --glass-bg: rgba(255, 255, 255, 0.14);
-      --glass-border: rgba(255, 255, 255, 0.12);
-      --card-shadow: 0 16px 38px rgba(25, 26, 13, 0.28);
-      --text: #fff8ef;
-      --muted: rgba(255, 245, 224, 0.78);
-      --accent: #f4c96f;
-      --accent-glow: 0 0 0 1px rgba(244, 201, 111, 0.7), 0 0 22px rgba(244, 201, 111, 0.38);
-      --badge-work: #d99f49;
-      --badge-personal: #87a65a;
-      --badge-travel: #52999b;
-      --bg-1: #4f6529;
-      --bg-2: #70893b;
-      --bg-3: #c08f42;
-      --bg-4: #3f7676;
+      --sans: "Nunito", "SF Pro Rounded", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-digits: "Nunito", "SF Pro Rounded", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+      /* Warm Nature Theme (default) */
+      --glass-bg: rgba(255, 255, 255, 0.13);
+      --glass-bg-hover: rgba(255, 255, 255, 0.19);
+      --glass-border: rgba(255, 255, 255, 0.16);
+      --glass-border-light: rgba(255, 255, 255, 0.28);
+      --glass-card-inner: rgba(255, 255, 255, 0.08);
+      --card-shadow: 0 20px 48px -10px rgba(15, 28, 12, 0.38), 0 0 1px 1px rgba(255, 255, 255, 0.12);
+      --text: #ffffff;
+      --text-pure: #ffffff;
+      --muted: rgba(255, 247, 230, 0.76);
+      --muted-faint: rgba(255, 247, 230, 0.52);
+      --accent: #f5c86c;
+      --accent-glow: 0 0 0 1px rgba(245, 200, 108, 0.65), 0 0 24px rgba(245, 200, 108, 0.35);
+      --btn-primary-bg: #fffbf2;
+      --btn-primary-text: #1d2b12;
+
+      /* Badge colors - Warm Nature */
+      --badge-travel-bg: rgba(79, 138, 127, 0.55);
+      --badge-travel-text: #b6f3e5;
+      --badge-travel-border: rgba(147, 219, 203, 0.35);
+
+      --badge-work-bg: rgba(199, 134, 52, 0.6);
+      --badge-work-text: #ffe0a3;
+      --badge-work-border: rgba(255, 214, 138, 0.35);
+
+      --badge-personal-bg: rgba(196, 106, 67, 0.6);
+      --badge-personal-text: #ffd5be;
+      --badge-personal-border: rgba(255, 187, 153, 0.35);
     }
 
     body.twilight {
-      --glass-bg: rgba(114, 85, 152, 0.22);
-      --glass-border: rgba(255, 255, 255, 0.15);
-      --card-shadow: 0 18px 36px rgba(11, 5, 23, 0.52);
-      --text: #f8eeff;
-      --muted: rgba(226, 201, 255, 0.78);
-      --accent: #f5a1ff;
-      --accent-glow: 0 0 0 1px rgba(245, 161, 255, 0.74), 0 0 22px rgba(245, 161, 255, 0.46);
-      --badge-work: #f58abf;
-      --badge-personal: #b88eff;
-      --badge-travel: #7ea4ff;
-      --bg-1: #3d144c;
-      --bg-2: #5b1f7a;
-      --bg-3: #31104a;
-      --bg-4: #120a2a;
+      /* Twilight City Theme */
+      --glass-bg: rgba(45, 20, 68, 0.28);
+      --glass-bg-hover: rgba(68, 28, 102, 0.38);
+      --glass-border: rgba(255, 255, 255, 0.14);
+      --glass-border-light: rgba(255, 255, 255, 0.26);
+      --glass-card-inner: rgba(148, 77, 208, 0.1);
+      --card-shadow: 0 22px 50px -10px rgba(8, 3, 20, 0.65), 0 0 1px 1px rgba(244, 114, 182, 0.18);
+      --text: #ffffff;
+      --text-pure: #ffffff;
+      --muted: rgba(238, 215, 255, 0.78);
+      --muted-faint: rgba(238, 215, 255, 0.52);
+      --accent: #f472b6;
+      --accent-glow: 0 0 0 1px rgba(244, 114, 182, 0.7), 0 0 24px rgba(244, 114, 182, 0.45);
+      --btn-primary-bg: #fdf2f8;
+      --btn-primary-text: #3b0764;
+
+      /* Badge colors - Twilight City */
+      --badge-travel-bg: rgba(99, 102, 241, 0.55);
+      --badge-travel-text: #c7d2fe;
+      --badge-travel-border: rgba(165, 180, 252, 0.35);
+
+      --badge-work-bg: rgba(56, 189, 248, 0.5);
+      --badge-work-text: #bae6fd;
+      --badge-work-border: rgba(125, 211, 252, 0.35);
+
+      --badge-personal-bg: rgba(217, 70, 239, 0.52);
+      --badge-personal-text: #f5d0fe;
+      --badge-personal-border: rgba(240, 171, 252, 0.35);
     }
 
-    * { box-sizing: border-box; }
-
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+
+    html, body {
       min-height: 100vh;
+      width: 100%;
       font-family: var(--sans);
       color: var(--text);
-      background: linear-gradient(145deg, var(--bg-1), var(--bg-2) 34%, var(--bg-3) 67%, var(--bg-4));
-      transition: background 0.5s ease, color 0.5s ease;
-      position: relative;
       overflow-x: hidden;
+      background-color: #121c0e;
     }
 
-    body::before,
-    body::after {
-      content: "";
+    /* Ambient background layers */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+
+    .bg-nature {
+      opacity: 1;
+    }
+
+    .bg-twilight {
+      opacity: 0;
+    }
+
+    body.twilight .bg-nature {
+      opacity: 0;
+    }
+
+    body.twilight .bg-twilight {
+      opacity: 1;
+    }
+
+    .bg-layer svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Subtle animated sunbeams / particle shimmer */
+    .light-rays {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      transition: opacity 0.5s ease;
-    }
-
-    body::before {
-      background:
-        radial-gradient(circle at 20% 20%, rgba(252, 220, 131, 0.38), transparent 38%),
-        radial-gradient(circle at 75% 15%, rgba(180, 210, 116, 0.3), transparent 34%),
-        radial-gradient(circle at 60% 85%, rgba(65, 139, 127, 0.24), transparent 38%);
-      opacity: 1;
-    }
-
-    body::after {
-      background:
-        linear-gradient(to top, rgba(17, 25, 14, 0.42), transparent 36%),
-        radial-gradient(circle at 78% 22%, rgba(255, 188, 95, 0.24), transparent 44%);
-      mix-blend-mode: screen;
-      opacity: 1;
-    }
-
-    body.twilight::before {
-      background:
-        radial-gradient(circle at 78% 18%, rgba(245, 137, 247, 0.28), transparent 35%),
-        radial-gradient(circle at 18% 80%, rgba(92, 121, 255, 0.22), transparent 36%),
-        linear-gradient(to top, rgba(8, 6, 20, 0.8), transparent 45%);
-    }
-
-    .theme-toggle {
-      position: fixed;
-      top: 16px;
-      right: 18px;
-      z-index: 10;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      color: var(--text);
-      border-radius: 99px;
-      padding: 10px 14px;
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      cursor: pointer;
-      font: 600 0.82rem var(--sans);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: var(--card-shadow);
-    }
-
-    .dashboard {
-      width: min(1150px, calc(100% - 40px));
-      margin: 64px auto 28px;
-      position: relative;
       z-index: 1;
+      background: radial-gradient(circle at 45% 30%, rgba(255, 230, 160, 0.16) 0%, transparent 60%);
+      mix-blend-mode: screen;
+      opacity: 0.85;
+      transition: opacity 0.8s ease;
     }
 
+    body.twilight .light-rays {
+      background: radial-gradient(circle at 75% 25%, rgba(244, 114, 182, 0.18) 0%, transparent 65%);
+      mix-blend-mode: screen;
+    }
+
+    /* Main layout container */
+    .dashboard-container {
+      position: relative;
+      z-index: 2;
+      width: min(1320px, calc(100% - 48px));
+      margin: 28px auto 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-container {
+        width: calc(100% - 24px);
+        margin: 16px auto 32px;
+        gap: 12px;
+      }
+    }
+
+    /* Glassmorphism primitives */
     .glass {
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       box-shadow: var(--card-shadow);
       border-radius: 20px;
+      transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.25s ease;
     }
 
+    /* Top dashboard bar */
     .topbar {
-      padding: 18px;
+      padding: 12px 20px;
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 18px;
-    }
-
-    .brand {
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      font-size: 1.12rem;
-    }
-
-    .controls {
-      display: flex;
+      gap: 16px;
       flex-wrap: wrap;
+    }
+
+    .brand-section {
+      display: flex;
       align-items: center;
-      gap: 10px;
-      justify-content: flex-end;
-      flex: 1;
+      gap: 12px;
     }
 
-    select,
-    .btn,
-    .chip {
-      border-radius: 12px;
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-pure);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+      user-select: none;
+    }
+
+    .controls-section {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Control Groups with small muted labels */
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .control-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: capitalize;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      padding-left: 4px;
+      user-select: none;
+    }
+
+    .segmented-control {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.18);
       border: 1px solid var(--glass-border);
-      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 2px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      height: 36px;
+      box-sizing: border-box;
+    }
+
+    .segment-btn {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      padding: 0 12px;
+      height: 28px;
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .segment-btn:hover {
       color: var(--text);
-      padding: 8px 12px;
-      font: 600 0.75rem var(--sans);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.08);
     }
 
-    .chip { cursor: pointer; }
-    .chip.active,
-    .btn.active,
-    .btn:hover,
-    .chip:hover,
-    select:focus {
-      outline: none;
-      box-shadow: var(--accent-glow);
-      border-color: rgba(255, 255, 255, 0.4);
+    .segment-btn.active {
+      color: var(--text-pure);
+      background: rgba(255, 255, 255, 0.22);
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .grid {
+    /* Checkbox toggle for Manual Re-order */
+    .checkbox-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+      padding: 0 14px;
+      height: 36px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.18);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-sizing: border-box;
+    }
+
+    .checkbox-label:hover {
+      color: var(--text-pure);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--glass-border-light);
+    }
+
+    .checkbox-custom {
+      width: 17px;
+      height: 17px;
+      border-radius: 5px;
+      border: 1.5px solid var(--glass-border-light);
+      background: rgba(0, 0, 0, 0.2);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .checkbox-custom svg {
+      width: 11px;
+      height: 11px;
+      stroke: #fff;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: all 0.2s ease;
+    }
+
+    input[type="checkbox"]:checked + .checkbox-custom {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    input[type="checkbox"]:checked + .checkbox-custom svg {
+      opacity: 1;
+      stroke: #1d2b12;
+      transform: scale(1);
+    }
+
+    body.twilight input[type="checkbox"]:checked + .checkbox-custom svg {
+      stroke: #3b0764;
+    }
+
+    input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+      height: 0;
+    }
+
+    /* Add Event Button */
+    .btn-add-event {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      padding: 0 18px;
+      height: 36px;
+      border-radius: 999px;
+      font-family: var(--sans);
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.4);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-sizing: border-box;
+    }
+
+    .btn-add-event:hover {
+      transform: translateY(-1px) scale(1.02);
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.3), var(--accent-glow);
+    }
+
+    .btn-add-event:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* Fixed Theme Toggle in top-right corner */
+    .theme-toggle-wrap {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      z-index: 100;
+    }
+
+    .theme-toggle-pill {
+      display: flex;
+      align-items: center;
+      background: rgba(20, 20, 20, 0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border-light);
+      border-radius: 999px;
+      padding: 3px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+      user-select: none;
+      gap: 2px;
+    }
+
+    .theme-opt-btn {
+      border: none;
+      background: transparent;
+      padding: 6px 10px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.55);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .theme-opt-btn svg {
+      width: 19px;
+      height: 19px;
+      display: block;
+    }
+
+    .theme-opt-btn.active {
+      background: #ffffff;
+      color: #1a1a1a;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    body.twilight .theme-opt-btn.active {
+      background: #ffffff;
+      color: #2b0e45;
+    }
+
+    /* Card Grid System */
+    .events-grid {
       display: grid;
-      grid-template-columns: minmax(280px, 1.2fr) 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-auto-rows: minmax(170px, auto);
       gap: 16px;
     }
 
-    .featured-wrap,
-    .list-wrap { min-height: 360px; }
+    .events-grid.has-featured {
+      grid-template-columns: repeat(4, 1fr);
+    }
 
-    .cards { display: grid; gap: 12px; }
+    @media (max-width: 1100px) {
+      .events-grid,
+      .events-grid.has-featured {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
 
+    @media (max-width: 640px) {
+      .events-grid,
+      .events-grid.has-featured {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Event Card Base */
     .event-card {
-      padding: 14px;
-      border-radius: 18px;
       position: relative;
-      display: grid;
-      gap: 10px;
-    }
-
-    .event-head {
+      padding: 20px 22px;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      align-items: start;
-      gap: 8px;
+      overflow: hidden;
+      border-radius: 20px;
     }
 
-    .event-title { margin: 0; font: 700 1rem var(--sans); }
-    .event-date { font-size: 0.78rem; color: var(--muted); }
-
-    .badge {
-      border-radius: 999px;
-      padding: 4px 10px;
-      font: 700 0.65rem var(--sans);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #fff;
+    .event-card:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-light);
+      box-shadow: 0 24px 50px -8px rgba(0, 0, 0, 0.45);
     }
 
-    .badge.work { background: var(--badge-work); }
-    .badge.personal { background: var(--badge-personal); }
-    .badge.travel { background: var(--badge-travel); }
+    /* Featured Event (spans 2 cols & 2 rows) */
+    .event-card.featured {
+      grid-column: span 2;
+      grid-row: span 2;
+      padding: 28px 32px;
+      min-height: 360px;
+      background: var(--glass-bg);
+      background-image: radial-gradient(circle at 75% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+    }
 
-    .timer {
-      font: 700 1.5rem/1.1 var(--serif);
-      letter-spacing: 0.04em;
+    @media (max-width: 1100px) {
+      .event-card.featured {
+        grid-column: span 2;
+        grid-row: span 1;
+        min-height: 320px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .event-card.featured {
+        grid-column: span 1;
+        grid-row: span 1;
+        padding: 20px 18px;
+        min-height: 290px;
+      }
+    }
+
+    /* Card Header */
+    .card-head {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
-    .labels {
-      display: flex;
-      gap: 14px;
-      font: 700 0.58rem var(--sans);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+    .featured-label {
+      font-size: 0.86rem;
+      font-weight: 500;
       color: var(--muted);
+      letter-spacing: 0.02em;
     }
 
-    .actions {
-      position: absolute;
-      top: 10px;
-      right: 10px;
+    /* Badges */
+    .category-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+      border: 1px solid transparent;
+      user-select: none;
+    }
+
+    .category-badge.travel {
+      background: var(--badge-travel-bg);
+      color: var(--badge-travel-text);
+      border-color: var(--badge-travel-border);
+    }
+
+    .category-badge.work {
+      background: var(--badge-work-bg);
+      color: var(--badge-work-text);
+      border-color: var(--badge-work-border);
+    }
+
+    .category-badge.personal {
+      background: var(--badge-personal-bg);
+      color: var(--badge-personal-text);
+      border-color: var(--badge-personal-border);
+    }
+
+    /* Card Action Buttons (Delete & Reorder) */
+    .card-actions {
       display: flex;
+      align-items: center;
       gap: 6px;
     }
 
-    .icon-btn {
+    .btn-action-pill {
       border: 1px solid var(--glass-border);
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text);
-      border-radius: 10px;
-      width: 26px;
-      height: 26px;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-    }
-
-    .featured-card {
-      height: 100%;
-      padding: 22px;
-      display: grid;
-      align-content: space-between;
-      gap: 18px;
-    }
-
-    .featured-card .event-title { font-size: 1.6rem; }
-    .featured-card .timer { font-size: clamp(1.8rem, 5vw, 2.7rem); }
-
-    .empty {
-      padding: 24px;
-      text-align: center;
+      background: rgba(0, 0, 0, 0.16);
       color: var(--muted);
-      font-size: 0.9rem;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    .add-panel {
-      margin-top: 16px;
-      padding: 14px;
+    .btn-action-pill:hover {
+      color: #ffffff;
+      background: rgba(239, 68, 68, 0.28);
+      border-color: rgba(239, 68, 68, 0.5);
+    }
+
+    .btn-action-pill svg {
+      width: 12px;
+      height: 12px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .btn-reorder-group {
       display: none;
-      gap: 10px;
-      grid-template-columns: 2fr 1.6fr 1fr auto;
+      align-items: center;
+      gap: 2px;
+      background: rgba(0, 0, 0, 0.16);
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      padding: 2px 4px;
     }
 
-    .add-panel.active { display: grid; }
+    body.manual-reorder-active .btn-reorder-group {
+      display: inline-flex;
+    }
 
-    .add-panel input,
-    .add-panel select {
-      min-width: 0;
+    .btn-move {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-move:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .btn-move svg {
+      width: 10px;
+      height: 10px;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      fill: none;
+    }
+
+    /* Card Info */
+    .card-title {
+      font-family: var(--sans);
+      font-weight: 700;
+      color: var(--text-pure);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .event-card.featured .card-title {
+      font-size: clamp(2rem, 3.8vw, 3.1rem);
+      margin-bottom: 8px;
+    }
+
+    .event-card:not(.featured) .card-title {
+      font-size: 1.32rem;
+    }
+
+    .card-date {
+      font-family: var(--sans);
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .event-card.featured .card-date {
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+    }
+
+    /* Timer Display */
+    .timer-wrap {
+      margin-top: auto;
+    }
+
+    .timer-digits {
+      font-family: var(--font-digits);
+      font-weight: 800;
+      color: var(--text-pure);
+      line-height: 1;
+      letter-spacing: -0.01em;
+      font-variant-numeric: tabular-nums;
+      display: flex;
+      align-items: center;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+    }
+
+    .event-card.featured .timer-digits {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .event-card:not(.featured) .timer-digits {
+      font-size: clamp(1.6rem, 2.3vw, 2.1rem);
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .timer-separator {
+      opacity: 0.85;
+      font-family: var(--font-digits);
+      font-weight: 800;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      position: relative;
+      top: -0.04em;
+      padding: 0 1px;
+    }
+
+    .timer-labels {
+      display: flex;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      user-select: none;
+    }
+
+    .event-card.featured .timer-labels {
+      font-size: 0.8rem;
+      gap: clamp(16px, 3.2vw, 36px);
+      margin-bottom: 18px;
+    }
+
+    .event-card:not(.featured) .timer-labels {
+      font-size: 0.58rem;
+      gap: 10px;
+    }
+
+    .featured-note {
+      font-family: var(--sans);
+      font-size: 0.86rem;
+      color: var(--muted-faint);
+      margin-top: 10px;
+      letter-spacing: 0.01em;
+    }
+
+    .completed-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 600;
+      color: #a7f3d0;
+      background: rgba(16, 185, 129, 0.25);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      padding: 6px 14px;
+      border-radius: 999px;
+    }
+
+    /* Star / Pin to Featured */
+    .btn-feature-star {
+      border: none;
+      background: transparent;
+      color: var(--muted-faint);
+      cursor: pointer;
+      padding: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      border-radius: 999px;
+    }
+
+    .btn-feature-star:hover {
+      color: var(--accent);
+      transform: scale(1.15);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-feature-star.is-featured {
+      color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    .btn-feature-star svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: fill 0.2s ease, stroke 0.2s ease;
+    }
+
+    .btn-feature-star.is-featured svg {
+      fill: currentColor;
+    }
+
+    /* Empty state */
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 50px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .empty-icon {
+      font-size: 2.2rem;
+      opacity: 0.7;
+    }
+
+    .empty-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-pure);
+    }
+
+    .empty-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      max-width: 360px;
+    }
+
+    /* Modal Dialog for Add Event */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-dialog {
+      width: min(480px, 100%);
+      background: rgba(28, 25, 23, 0.75);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid var(--glass-border-light);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+      border-radius: 24px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transform: scale(0.94) translateY(12px);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body.twilight .modal-dialog {
+      background: rgba(30, 16, 48, 0.82);
+    }
+
+    .modal-overlay.open .modal-dialog {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-pure);
+    }
+
+    .btn-modal-close {
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--muted);
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-modal-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    .form-input,
+    .form-select {
       width: 100%;
       border-radius: 12px;
       border: 1px solid var(--glass-border);
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--text);
-      padding: 10px;
-      font: 500 0.88rem var(--sans);
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      padding: 12px 14px;
+      font-family: var(--sans);
+      font-size: 0.92rem;
+      outline: none;
+      transition: all 0.2s ease;
     }
 
-    @media (max-width: 940px) {
-      .grid { grid-template-columns: 1fr; }
-      .add-panel { grid-template-columns: 1fr; }
+    .form-input:focus,
+    .form-select:focus {
+      border-color: var(--accent);
+      box-shadow: var(--accent-glow);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .form-select option {
+      background: #231b14;
+      color: #fff;
+    }
+
+    body.twilight .form-select option {
+      background: #28103b;
+      color: #fff;
+    }
+
+    .modal-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .btn-cancel {
+      border: 1px solid var(--glass-border);
+      background: transparent;
+      color: var(--muted);
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-cancel:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-submit {
+      border: none;
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      padding: 10px 22px;
+      border-radius: 12px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .btn-submit:hover {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), var(--accent-glow);
+      transform: translateY(-1px);
     }
   </style>
 </head>
 <body>
-  <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme">🌲☀️ Warm Nature</button>
 
-  <main class="dashboard">
-    <section class="topbar glass">
-      <div class="brand">milestones.io</div>
-      <div class="controls">
-        <select id="sortSelect" aria-label="Sort events">
-          <option value="closest">Closest</option>
-          <option value="furthest">Furthest</option>
-          <option value="az">A-Z</option>
-        </select>
-        <button class="chip active" data-filter="all" type="button">All</button>
-        <button class="chip" data-filter="work" type="button">Work</button>
-        <button class="chip" data-filter="personal" type="button">Personal</button>
-        <button class="chip" data-filter="travel" type="button">Travel</button>
-        <button id="manualBtn" class="btn" type="button">Manual Re-order</button>
-        <button id="addBtn" class="btn active" type="button">+ Add Event</button>
+  <!-- Theme Toggle Switcher (Top-right pill) -->
+  <aside class="theme-toggle-wrap">
+    <div class="theme-toggle-pill" id="themeTogglePill" title="Switch Theme">
+      <button class="theme-opt-btn active" id="btnWarmTheme" aria-label="Warm Nature Theme">
+        <!-- Mountain & Sun Icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="7" r="3.5" fill="currentColor" stroke="none" />
+          <path d="M3 20l5.5-7.5L12 17l4-5.5L21 20H3z" fill="currentColor" stroke="none" />
+          <path d="M3 20h18" stroke="currentColor" stroke-width="2" />
+        </svg>
+      </button>
+      <button class="theme-opt-btn" id="btnTwilightTheme" aria-label="Twilight City Theme">
+        <!-- City Skyline & Crescent Moon Icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 4a4.5 4.5 0 0 0-4.5 4.5 4.5 4.5 0 0 0 1.2 3.1A6 6 0 1 1 18 4z" fill="currentColor" stroke="none" />
+          <path d="M3 21h18M5 21V10h4v11M11 21V7h4v14M17 21v-8h3v8" stroke="currentColor" stroke-width="1.8" />
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Background SVG 1: Warm Nature Theme -->
+  <div class="bg-layer bg-nature" id="bgNature" aria-hidden="true">
+    <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Sky Gradient -->
+        <linearGradient id="natureSkyGrad" x1="0%" y1="0%" x2="40%" y2="100%">
+          <stop offset="0%" stop-color="#244d57" />
+          <stop offset="28%" stop-color="#3d6f6e" />
+          <stop offset="55%" stop-color="#8a9954" />
+          <stop offset="78%" stop-color="#d49b40" />
+          <stop offset="100%" stop-color="#f5c25e" />
+        </linearGradient>
+
+        <!-- Sun Glow Radial Gradient -->
+        <radialGradient id="sunBurst" cx="44%" cy="38%" r="48%">
+          <stop offset="0%" stop-color="#fffbed" stop-opacity="0.95" />
+          <stop offset="18%" stop-color="#fde68a" stop-opacity="0.8" />
+          <stop offset="42%" stop-color="#f59e0b" stop-opacity="0.45" />
+          <stop offset="75%" stop-color="#d97706" stop-opacity="0.12" />
+          <stop offset="100%" stop-color="#b45309" stop-opacity="0" />
+        </radialGradient>
+
+        <!-- Golden Sun Ray Gradient -->
+        <linearGradient id="sunRayGrad" x1="38%" y1="20%" x2="68%" y2="100%">
+          <stop offset="0%" stop-color="#fff" stop-opacity="0.45" />
+          <stop offset="30%" stop-color="#fef08a" stop-opacity="0.32" />
+          <stop offset="65%" stop-color="#f59e0b" stop-opacity="0.15" />
+          <stop offset="100%" stop-color="#f59e0b" stop-opacity="0" />
+        </linearGradient>
+
+        <!-- Distant Mountains -->
+        <linearGradient id="mountainsDistant" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#768f69" stop-opacity="0.85" />
+          <stop offset="100%" stop-color="#49633e" stop-opacity="0.95" />
+        </linearGradient>
+
+        <!-- Midground Forest Ridge -->
+        <linearGradient id="ridgeMid" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#3e5929" />
+          <stop offset="100%" stop-color="#233a17" />
+        </linearGradient>
+
+        <!-- Foreground Deep Canopy -->
+        <linearGradient id="foliageGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#34481b" />
+          <stop offset="50%" stop-color="#223311" />
+          <stop offset="100%" stop-color="#14210a" />
+        </linearGradient>
+
+        <!-- Warm Leaf Highlights -->
+        <linearGradient id="leafGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#a3a83b" stop-opacity="0.8" />
+          <stop offset="100%" stop-color="#4e6524" stop-opacity="0.9" />
+        </linearGradient>
+      </defs>
+
+      <!-- Sky Base -->
+      <rect width="1920" height="1080" fill="url(#natureSkyGrad)" />
+
+      <!-- Glowing Sun Center -->
+      <circle cx="840" cy="410" r="480" fill="url(#sunBurst)" />
+
+      <!-- Golden Sun Rays filtering through canopy -->
+      <g opacity="0.85">
+        <polygon points="840,410 400,1080 540,1080" fill="url(#sunRayGrad)" />
+        <polygon points="840,410 650,1080 820,1080" fill="url(#sunRayGrad)" />
+        <polygon points="840,410 930,1080 1140,1080" fill="url(#sunRayGrad)" />
+        <polygon points="840,410 1200,1080 1480,1080" fill="url(#sunRayGrad)" />
+        <polygon points="840,410 1560,1080 1880,1080" fill="url(#sunRayGrad)" />
+      </g>
+
+      <!-- Distant Mountain Ridges -->
+      <path d="M0,640 Q280,560 580,590 T1180,550 T1680,620 Q1820,600 1920,630 L1920,1080 L0,1080 Z" fill="url(#mountainsDistant)" opacity="0.65" />
+      <path d="M0,710 Q340,650 720,680 T1380,640 T1920,720 L1920,1080 L0,1080 Z" fill="url(#ridgeMid)" opacity="0.85" />
+
+      <!-- Layered Pine Forest on Midground Ridges -->
+      <g fill="#213314" opacity="0.95">
+        <!-- Ridge pines -->
+        <polygon points="210,690 220,640 230,690" />
+        <polygon points="225,695 235,635 245,695" />
+        <polygon points="240,700 250,645 260,700" />
+        <polygon points="410,670 422,610 435,670" />
+        <polygon points="430,675 442,605 455,675" />
+        <polygon points="450,680 465,618 478,680" />
+        <polygon points="680,660 695,595 710,660" />
+        <polygon points="705,665 720,590 735,665" />
+        <polygon points="980,650 995,585 1010,650" />
+        <polygon points="1005,655 1020,578 1035,655" />
+        <polygon points="1030,660 1045,590 1060,660" />
+        <polygon points="1320,665 1335,600 1350,665" />
+        <polygon points="1345,670 1360,592 1375,670" />
+        <polygon points="1520,685 1535,620 1550,685" />
+        <polygon points="1545,690 1560,612 1575,690" />
+      </g>
+
+      <!-- Majestic Tree Trunks & Framing Branches -->
+      <!-- Left Tree Trunk -->
+      <path d="M-60,0 C-20,250 80,480 30,850 C10,950 0,1080 0,1080 L-120,1080 L-120,0 Z" fill="#1b280e" />
+      <path d="M25,280 C140,260 280,240 380,310 C320,330 200,310 15,360 Z" fill="#1b280e" />
+      <path d="M30,520 C160,560 320,520 460,610 C380,640 240,610 20,620 Z" fill="#18240c" />
+
+      <!-- Right Tree Trunk -->
+      <path d="M1980,0 C1920,280 1840,520 1880,820 C1900,950 1920,1080 1920,1080 L2040,1080 L2040,0 Z" fill="#1b280e" />
+      <path d="M1870,250 C1750,230 1620,220 1520,280 C1590,305 1700,280 1880,320 Z" fill="#1b280e" />
+      <path d="M1860,490 C1720,520 1580,480 1440,560 C1540,580 1680,560 1870,580 Z" fill="#18240c" />
+
+      <!-- Top & Side Lush Foliage Canopy with Sunlit Golden Leaves -->
+      <g fill="url(#foliageGrad)">
+        <!-- Top Canopy clusters -->
+        <circle cx="150" cy="40" r="140" />
+        <circle cx="320" cy="70" r="160" />
+        <circle cx="510" cy="50" r="150" />
+        <circle cx="700" cy="30" r="140" />
+        <circle cx="890" cy="60" r="160" />
+        <circle cx="1080" cy="40" r="150" />
+        <circle cx="1280" cy="70" r="160" />
+        <circle cx="1480" cy="50" r="150" />
+        <circle cx="1700" cy="60" r="170" />
+        <circle cx="1890" cy="40" r="160" />
+
+        <!-- Drooping branch clusters -->
+        <circle cx="180" cy="180" r="110" />
+        <circle cx="340" cy="220" r="120" />
+        <circle cx="480" cy="190" r="110" />
+        <circle cx="1420" cy="190" r="115" />
+        <circle cx="1580" cy="220" r="125" />
+        <circle cx="1750" cy="190" r="115" />
+      </g>
+
+      <!-- Sun-dappled warm leaves overlay -->
+      <g fill="url(#leafGlow)">
+        <circle cx="360" cy="190" r="85" />
+        <circle cx="490" cy="170" r="75" />
+        <circle cx="680" cy="90" r="70" />
+        <circle cx="860" cy="110" r="80" />
+        <circle cx="1050" cy="90" r="75" />
+        <circle cx="1250" cy="110" r="80" />
+        <circle cx="1440" cy="170" r="75" />
+        <circle cx="1560" cy="190" r="85" />
+
+        <!-- Little foliage clusters on edges -->
+        <circle cx="70" cy="450" r="65" />
+        <circle cx="90" cy="530" r="75" />
+        <circle cx="50" cy="720" r="70" />
+        <circle cx="1840" cy="420" r="65" />
+        <circle cx="1820" cy="510" r="75" />
+        <circle cx="1860" cy="700" r="70" />
+      </g>
+
+      <!-- Warm Sun Sparkles & Dappled Bokeh -->
+      <g fill="#fff" opacity="0.45">
+        <circle cx="740" cy="430" r="6" />
+        <circle cx="790" cy="480" r="4.5" />
+        <circle cx="860" cy="440" r="5" />
+        <circle cx="920" cy="490" r="4" />
+        <circle cx="830" cy="560" r="7" />
+        <circle cx="680" cy="510" r="5" />
+        <circle cx="1020" cy="460" r="4" />
+        <circle cx="1110" cy="530" r="5.5" />
+        <circle cx="600" cy="480" r="4" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- Background SVG 2: Twilight City Theme -->
+  <div class="bg-layer bg-twilight" id="bgTwilight" aria-hidden="true">
+    <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Twilight Sky Gradient: deep violet-purple to radiant pink/magenta -->
+        <linearGradient id="twilightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#120a2a" />
+          <stop offset="25%" stop-color="#2a0d42" />
+          <stop offset="48%" stop-color="#4d1663" />
+          <stop offset="70%" stop-color="#831868" />
+          <stop offset="85%" stop-color="#c02678" />
+          <stop offset="94%" stop-color="#f43f5e" />
+          <stop offset="100%" stop-color="#fda4af" />
+        </linearGradient>
+
+        <!-- Moon Glow -->
+        <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+          <stop offset="35%" stop-color="#fed7aa" stop-opacity="0.85" />
+          <stop offset="70%" stop-color="#f472b6" stop-opacity="0.3" />
+          <stop offset="100%" stop-color="#a855f7" stop-opacity="0" />
+        </radialGradient>
+
+        <!-- City Base Glow -->
+        <linearGradient id="cityHorizonGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#fb7185" stop-opacity="0.4" />
+          <stop offset="100%" stop-color="#0f071e" stop-opacity="0.95" />
+        </linearGradient>
+
+        <!-- Skyline Layers -->
+        <linearGradient id="skylineDistant" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#581c63" stop-opacity="0.9" />
+          <stop offset="100%" stop-color="#2a0833" stop-opacity="1" />
+        </linearGradient>
+
+        <linearGradient id="skylineMid" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#340d42" />
+          <stop offset="100%" stop-color="#14041b" />
+        </linearGradient>
+
+        <linearGradient id="skylineFore" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#1f0729" />
+          <stop offset="100%" stop-color="#09020d" />
+        </linearGradient>
+
+        <!-- Window Light Patterns -->
+        <pattern id="windowGridAmber" width="16" height="24" patternUnits="userSpaceOnUse">
+          <rect x="2" y="3" width="5" height="7" rx="1" fill="#fde68a" opacity="0.85" />
+          <rect x="9" y="3" width="5" height="7" rx="1" fill="#fde68a" opacity="0.45" />
+          <rect x="2" y="13" width="5" height="7" rx="1" fill="#fed7aa" opacity="0.75" />
+          <rect x="9" y="13" width="5" height="7" rx="1" fill="#fed7aa" opacity="0.3" />
+        </pattern>
+
+        <pattern id="windowGridCyan" width="14" height="22" patternUnits="userSpaceOnUse">
+          <rect x="2" y="2" width="4" height="6" rx="1" fill="#38bdf8" opacity="0.75" />
+          <rect x="8" y="2" width="4" height="6" rx="1" fill="#bae6fd" opacity="0.85" />
+          <rect x="2" y="12" width="4" height="6" rx="1" fill="#38bdf8" opacity="0.4" />
+          <rect x="8" y="12" width="4" height="6" rx="1" fill="#38bdf8" opacity="0.75" />
+        </pattern>
+
+        <pattern id="windowGridPink" width="16" height="26" patternUnits="userSpaceOnUse">
+          <rect x="2" y="3" width="5" height="8" rx="1" fill="#f472b6" opacity="0.85" />
+          <rect x="9" y="3" width="5" height="8" rx="1" fill="#fbcfe8" opacity="0.65" />
+          <rect x="2" y="15" width="5" height="8" rx="1" fill="#f472b6" opacity="0.4" />
+          <rect x="9" y="15" width="5" height="8" rx="1" fill="#f472b6" opacity="0.9" />
+        </pattern>
+      </defs>
+
+      <!-- Twilight Sky Base -->
+      <rect width="1920" height="1080" fill="url(#twilightSky)" />
+
+      <!-- Crescent Moon & Aura -->
+      <circle cx="1520" cy="220" r="85" fill="url(#moonGlow)" opacity="0.3" />
+      <g transform="translate(1485, 185) scale(1.4)">
+        <path d="M24 4 C14 4 6 12 6 22 C6 32 14 40 24 40 C28 40 32 38 35 36 C25 35 18 29 18 22 C18 15 25 9 35 8 C32 6 28 4 24 4 Z" fill="#fffdf5" filter="drop-shadow(0 0 12px rgba(254, 215, 170, 0.8))" />
+      </g>
+
+      <!-- Twinkling Starfield -->
+      <g fill="#ffffff">
+        <circle cx="180" cy="110" r="1.5" opacity="0.8" />
+        <circle cx="290" cy="70" r="2" opacity="0.9" />
+        <circle cx="380" cy="160" r="1.2" opacity="0.6" />
+        <circle cx="510" cy="90" r="1.8" opacity="0.85" />
+        <circle cx="640" cy="140" r="1.2" opacity="0.5" />
+        <circle cx="780" cy="65" r="2.2" opacity="0.95" />
+        <circle cx="920" cy="120" r="1.4" opacity="0.7" />
+        <circle cx="1060" cy="80" r="1.6" opacity="0.8" />
+        <circle cx="1200" cy="150" r="1.2" opacity="0.6" />
+        <circle cx="1340" cy="95" r="2" opacity="0.9" />
+        <circle cx="1680" cy="110" r="1.5" opacity="0.75" />
+        <circle cx="1810" cy="80" r="2" opacity="0.85" />
+        <circle cx="220" cy="240" r="1.2" opacity="0.5" />
+        <circle cx="450" cy="280" r="1.6" opacity="0.7" />
+        <circle cx="850" cy="230" r="1.4" opacity="0.6" />
+        <circle cx="1140" cy="260" r="1.8" opacity="0.8" />
+        <circle cx="1740" cy="220" r="1.4" opacity="0.65" />
+      </g>
+
+      <!-- Soft Glowing Evening Clouds -->
+      <g fill="#e879f9" opacity="0.18">
+        <ellipse cx="400" cy="380" rx="260" ry="40" />
+        <ellipse cx="490" cy="360" rx="200" ry="35" />
+        <ellipse cx="1280" cy="340" rx="320" ry="45" />
+        <ellipse cx="1400" cy="320" rx="220" ry="38" />
+      </g>
+
+      <!-- Horizon Glow -->
+      <rect y="600" width="1920" height="480" fill="url(#cityHorizonGlow)" />
+
+      <!-- Layer 1: Distant Skyline Silhouettes -->
+      <g fill="url(#skylineDistant)">
+        <rect x="60" y="580" width="80" height="500" />
+        <polygon points="100,530 90,580 110,580" />
+        <rect x="180" y="540" width="110" height="540" />
+        <rect x="330" y="590" width="75" height="490" />
+        <rect x="440" y="520" width="130" height="560" />
+        <polygon points="505,460 495,520 515,520" />
+        <rect x="610" y="570" width="90" height="510" />
+        <rect x="740" y="500" width="140" height="580" />
+        <polygon points="810,430 800,500 820,500" />
+        <rect x="920" y="550" width="85" height="530" />
+        <rect x="1040" y="510" width="120" height="570" />
+        <rect x="1200" y="560" width="100" height="520" />
+        <rect x="1340" y="490" width="150" height="590" />
+        <polygon points="1415,410 1405,490 1425,490" />
+        <rect x="1530" y="540" width="90" height="540" />
+        <rect x="1660" y="520" width="120" height="560" />
+        <rect x="1810" y="570" width="110" height="510" />
+      </g>
+
+      <!-- Layer 2: Midground Skyscrapers with glowing windows -->
+      <g fill="url(#skylineMid)">
+        <rect x="110" y="620" width="105" height="460" />
+        <rect x="250" y="580" width="125" height="500" />
+        <rect x="400" y="640" width="95" height="440" />
+        <rect x="530" y="560" width="135" height="520" />
+        <rect x="700" y="600" width="110" height="480" />
+        <rect x="840" y="540" width="145" height="540" />
+        <polygon points="912,470 905,540 920,540" />
+        <rect x="1020" y="590" width="120" height="490" />
+        <rect x="1180" y="630" width="110" height="450" />
+        <rect x="1310" y="550" width="140" height="530" />
+        <polygon points="1380,480 1372,550 1388,550" />
+        <rect x="1480" y="610" width="120" height="470" />
+        <rect x="1630" y="570" width="130" height="510" />
+        <rect x="1780" y="630" width="100" height="450" />
+      </g>
+
+      <!-- Midground Window Grids (Glowing golden & cyan) -->
+      <g opacity="0.75">
+        <rect x="260" y="610" width="105" height="380" fill="url(#windowGridAmber)" />
+        <rect x="545" y="590" width="105" height="400" fill="url(#windowGridCyan)" />
+        <rect x="855" y="570" width="115" height="420" fill="url(#windowGridAmber)" />
+        <rect x="1325" y="580" width="110" height="410" fill="url(#windowGridPink)" />
+        <rect x="1645" y="600" width="100" height="390" fill="url(#windowGridAmber)" />
+      </g>
+
+      <!-- Layer 3: Foreground Detailed Towers & Rooftops -->
+      <g fill="url(#skylineFore)">
+        <rect x="0" y="700" width="130" height="380" />
+        <rect x="160" y="670" width="120" height="410" />
+        <rect x="310" y="710" width="140" height="370" />
+        <rect x="480" y="650" width="150" height="430" />
+        <polygon points="555,590 550,650 560,650" />
+        <rect x="670" y="690" width="130" height="390" />
+        <rect x="820" y="640" width="170" height="440" />
+        <polygon points="905,580 900,640 910,640" />
+        <rect x="1030" y="680" width="140" height="400" />
+        <rect x="1200" y="660" width="150" height="420" />
+        <polygon points="1275,600 1270,660 1280,660" />
+        <rect x="1390" y="700" width="130" height="380" />
+        <rect x="1550" y="650" width="160" height="430" />
+        <rect x="1740" y="690" width="180" height="390" />
+      </g>
+
+      <!-- Foreground Window Grids -->
+      <g opacity="0.88">
+        <rect x="175" y="695" width="90" height="320" fill="url(#windowGridAmber)" />
+        <rect x="500" y="675" width="110" height="340" fill="url(#windowGridPink)" />
+        <rect x="840" y="665" width="130" height="350" fill="url(#windowGridAmber)" />
+        <rect x="1220" y="685" width="110" height="330" fill="url(#windowGridCyan)" />
+        <rect x="1575" y="675" width="110" height="340" fill="url(#windowGridAmber)" />
+      </g>
+
+      <!-- Rooftop Antenna Beacon Red/Cyan Lights -->
+      <g>
+        <circle cx="555" cy="588" r="3" fill="#ff2d55" filter="drop-shadow(0 0 6px #ff2d55)" />
+        <circle cx="905" cy="578" r="3.5" fill="#38bdf8" filter="drop-shadow(0 0 7px #38bdf8)" />
+        <circle cx="1275" cy="598" r="3" fill="#ff2d55" filter="drop-shadow(0 0 6px #ff2d55)" />
+        <circle cx="810" cy="428" r="2.5" fill="#ff2d55" filter="drop-shadow(0 0 5px #ff2d55)" />
+        <circle cx="1415" cy="408" r="3" fill="#38bdf8" filter="drop-shadow(0 0 6px #38bdf8)" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="light-rays"></div>
+
+  <!-- Dashboard Main Container -->
+  <main class="dashboard-container">
+    
+    <!-- Top Glass Navigation Bar -->
+    <header class="topbar glass">
+      <div class="brand-section">
+        <h1 class="brand-title">Live Countdown Dashboard</h1>
       </div>
-    </section>
 
-    <section id="addPanel" class="add-panel glass">
-      <input id="eventTitle" type="text" placeholder="Event title" maxlength="60" />
-      <input id="eventDate" type="datetime-local" />
-      <select id="eventCategory">
-        <option value="work">Work</option>
-        <option value="personal">Personal</option>
-        <option value="travel">Travel</option>
-      </select>
-      <button id="saveEvent" class="btn active" type="button">Save</button>
-    </section>
+      <div class="controls-section">
+        <!-- Sorting Segmented Control -->
+        <div class="control-group">
+          <span class="control-label">Sorting</span>
+          <div class="segmented-control" role="group" aria-label="Sort milestones">
+            <button class="segment-btn active" data-sort="closest" type="button">closest</button>
+            <button class="segment-btn" data-sort="furthest" type="button">furthest</button>
+            <button class="segment-btn" data-sort="az" type="button">A-Z</button>
+          </div>
+        </div>
 
-    <section class="grid">
-      <article id="featuredWrap" class="featured-wrap glass"></article>
-      <article class="list-wrap">
-        <div id="cards" class="cards"></div>
-      </article>
+        <!-- Category Filters Segmented Control -->
+        <div class="control-group">
+          <span class="control-label">Category</span>
+          <div class="segmented-control" role="group" aria-label="Filter milestones by category">
+            <button class="segment-btn active" data-category="all" type="button">all</button>
+            <button class="segment-btn" data-category="work" type="button">work</button>
+            <button class="segment-btn" data-category="personal" type="button">personal</button>
+            <button class="segment-btn" data-category="travel" type="button">travel</button>
+          </div>
+        </div>
+
+        <!-- Manual Re-order Checkbox -->
+        <label class="checkbox-label" title="Enable custom up/down card ordering">
+          <input type="checkbox" id="checkManualReorder" />
+          <span class="checkbox-custom">
+            <svg viewBox="0 0 12 10">
+              <polyline points="1.5 5 4.5 8 10.5 2"></polyline>
+            </svg>
+          </span>
+          <span>Manual Re-order</span>
+        </label>
+
+        <!-- Add Event Button -->
+        <button class="btn-add-event" id="btnOpenAddModal" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>Add Event</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Cards Grid -->
+    <section class="events-grid" id="eventsGrid" aria-label="Milestone Countdowns">
+      <!-- Cards dynamically generated here -->
     </section>
   </main>
 
+  <!-- Add Milestone Modal -->
+  <div class="modal-overlay" id="addEventModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">Create New Milestone</h2>
+        <button class="btn-modal-close" id="btnCloseModal" type="button" aria-label="Close modal">✕</button>
+      </div>
+
+      <form id="addEventForm">
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label class="form-label" for="inputTitle">Milestone Title</label>
+          <input class="form-input" id="inputTitle" type="text" placeholder="e.g. New Year 2027, Trip to Japan..." required maxlength="60" />
+        </div>
+
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label class="form-label" for="inputDateTime">Target Date &amp; Time</label>
+          <input class="form-input" id="inputDateTime" type="datetime-local" required />
+        </div>
+
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label class="form-label" for="selectCategory">Category</label>
+          <select class="form-select" id="selectCategory">
+            <option value="personal">Personal</option>
+            <option value="work">Work</option>
+            <option value="travel">Travel</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label class="form-label" for="inputNote">Subtitle / Note (Optional)</label>
+          <input class="form-input" id="inputNote" type="text" placeholder="e.g. Target date, 2027 or flight to Tokyo" maxlength="80" />
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-cancel" id="btnCancelModal" type="button">Cancel</button>
+          <button class="btn-submit" type="submit">Create Milestone</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
-    const STORAGE_KEY = "milestones-dashboard-events-v1";
-    const PREFS_KEY = "milestones-dashboard-prefs-v1";
+    (function () {
+      "use strict";
 
-    const VALID_CATEGORIES = ["work", "personal", "travel"];
-    const initialEvents = [
-      { id: crypto.randomUUID(), title: "Product Launch", category: "work", target: "2026-12-15T09:00" },
-      { id: crypto.randomUUID(), title: "Mountain Getaway", category: "travel", target: "2026-11-02T07:00" },
-      { id: crypto.randomUUID(), title: "Mom's Birthday", category: "personal", target: "2026-10-21T00:00" }
-    ];
+      const STORAGE_EVENTS_KEY = "milestones_io_events_v3";
+      const STORAGE_SETTINGS_KEY = "milestones_io_settings_v3";
 
-    let events = [];
-    let prefs = { theme: "warm", filter: "all", sort: "closest", manual: false, showAdd: false };
+      // Initial sample events (reduced clean set)
+      const DEFAULT_EVENTS = [
+        {
+          id: "evt-1",
+          title: "New Year 2027",
+          category: "personal",
+          target: "2027-01-01T00:00:00",
+          note: "Celebration countdown",
+          isFeatured: false
+        },
+        {
+          id: "evt-2",
+          title: "Trip to Japan",
+          category: "travel",
+          target: "2027-04-12T09:00:00",
+          note: "Cherry blossom season",
+          isFeatured: false
+        },
+        {
+          id: "evt-3",
+          title: "Product Launch",
+          category: "work",
+          target: "2027-06-01T12:00:00",
+          note: "Version 2.0 release",
+          isFeatured: false
+        }
+      ];
 
-    const el = {
-      themeToggle: document.getElementById("themeToggle"),
-      sortSelect: document.getElementById("sortSelect"),
-      cards: document.getElementById("cards"),
-      featuredWrap: document.getElementById("featuredWrap"),
-      chips: Array.from(document.querySelectorAll(".chip")),
-      manualBtn: document.getElementById("manualBtn"),
-      addBtn: document.getElementById("addBtn"),
-      addPanel: document.getElementById("addPanel"),
-      eventTitle: document.getElementById("eventTitle"),
-      eventDate: document.getElementById("eventDate"),
-      eventCategory: document.getElementById("eventCategory"),
-      saveEvent: document.getElementById("saveEvent")
-    };
+      // State
+      let state = {
+        theme: "warm", // 'warm' | 'twilight'
+        category: "all", // 'all' | 'work' | 'personal' | 'travel'
+        sort: "closest", // 'closest' | 'furthest' | 'az'
+        manualReorder: false,
+        events: []
+      };
 
-    function normalizeCategory(category) {
-      return VALID_CATEGORIES.includes(category) ? category : "personal";
-    }
+      // DOM Elements
+      const dom = {
+        body: document.body,
+        btnWarm: document.getElementById("btnWarmTheme"),
+        btnTwilight: document.getElementById("btnTwilightTheme"),
+        themePill: document.getElementById("themeTogglePill"),
+        sortButtons: document.querySelectorAll("[data-sort]"),
+        categoryButtons: document.querySelectorAll("[data-category]"),
+        checkManual: document.getElementById("checkManualReorder"),
+        btnOpenAdd: document.getElementById("btnOpenAddModal"),
+        modalOverlay: document.getElementById("addEventModal"),
+        btnCloseModal: document.getElementById("btnCloseModal"),
+        btnCancelModal: document.getElementById("btnCancelModal"),
+        addForm: document.getElementById("addEventForm"),
+        inputTitle: document.getElementById("inputTitle"),
+        inputDateTime: document.getElementById("inputDateTime"),
+        selectCategory: document.getElementById("selectCategory"),
+        inputNote: document.getElementById("inputNote"),
+        eventsGrid: document.getElementById("eventsGrid")
+      };
 
-    function escapeHtml(text) {
-      return String(text).replace(/[&<>'"]/g, (char) => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        "'": "&#39;",
-        "\"": "&quot;"
-      }[char]));
-    }
+      // Load State from localStorage
+      function loadPersistedState() {
+        try {
+          const savedSettings = localStorage.getItem(STORAGE_SETTINGS_KEY) || localStorage.getItem("milestones_io_settings_v2");
+          if (savedSettings) {
+            const parsed = JSON.parse(savedSettings);
+            state.theme = parsed.theme || "warm";
+            state.category = parsed.category || "all";
+            state.sort = parsed.sort || "closest";
+            state.manualReorder = Boolean(parsed.manualReorder);
+          }
+        } catch (e) {
+          console.warn("Could not read settings from localStorage", e);
+        }
 
-    function loadState() {
-      const storedEvents = localStorage.getItem(STORAGE_KEY);
-      const storedPrefs = localStorage.getItem(PREFS_KEY);
-      events = storedEvents ? JSON.parse(storedEvents) : initialEvents;
-      events = events
-        .filter((event) => event && event.id && event.title && event.target)
-        .map((event) => ({ ...event, category: normalizeCategory(event.category) }));
-      prefs = storedPrefs ? { ...prefs, ...JSON.parse(storedPrefs) } : prefs;
-      prefs.filter = ["all", ...VALID_CATEGORIES].includes(prefs.filter) ? prefs.filter : "all";
-      prefs.sort = ["closest", "furthest", "az"].includes(prefs.sort) ? prefs.sort : "closest";
-      prefs.manual = Boolean(prefs.manual);
-      prefs.showAdd = Boolean(prefs.showAdd);
-    }
+        try {
+          const savedEvents = localStorage.getItem(STORAGE_EVENTS_KEY);
+          if (savedEvents) {
+            state.events = JSON.parse(savedEvents);
+          } else {
+            // Check if user has legacy data from v2
+            const v2Events = localStorage.getItem("milestones_io_events_v2");
+            if (v2Events) {
+              const parsedV2 = JSON.parse(v2Events);
+              // If v2 was just the 9 default events, reset to the new reduced sample data
+              if (Array.isArray(parsedV2) && (parsedV2.length === 9 || parsedV2.some(e => e.id === "evt-9"))) {
+                state.events = [...DEFAULT_EVENTS];
+              } else {
+                state.events = parsedV2;
+              }
+            } else {
+              state.events = [...DEFAULT_EVENTS];
+            }
+          }
+        } catch (e) {
+          console.warn("Could not read events from localStorage", e);
+          state.events = [...DEFAULT_EVENTS];
+        }
 
-    function saveState() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
-      localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
-    }
-
-    function setTheme(theme) {
-      prefs.theme = theme;
-      document.body.classList.toggle("twilight", theme === "twilight");
-      el.themeToggle.textContent = theme === "twilight" ? "🏙️🌙 Twilight City" : "🌲☀️ Warm Nature";
-      saveState();
-    }
-
-    function msToParts(ms) {
-      if (ms <= 0) return null;
-      const s = Math.floor(ms / 1000);
-      const days = Math.floor(s / 86400);
-      const hours = Math.floor((s % 86400) / 3600);
-      const mins = Math.floor((s % 3600) / 60);
-      const secs = s % 60;
-      return [days, hours, mins, secs].map((v) => String(v).padStart(2, "0"));
-    }
-
-    function filteredEvents() {
-      let list = events.filter((e) => prefs.filter === "all" || e.category === prefs.filter);
-      if (!prefs.manual) {
-        const sorter = {
-          closest: (a, b) => new Date(a.target) - new Date(b.target),
-          furthest: (a, b) => new Date(b.target) - new Date(a.target),
-          az: (a, b) => a.title.localeCompare(b.title)
-        }[prefs.sort];
-        list = [...list].sort(sorter);
+        // Validate structure
+        if (!Array.isArray(state.events) || state.events.length === 0) {
+          state.events = [...DEFAULT_EVENTS];
+        }
       }
-      return list;
-    }
 
-    function dateText(value) {
-      return new Date(value).toLocaleString(undefined, {
-        year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"
-      });
-    }
+      function savePersistedState() {
+        try {
+          localStorage.setItem(STORAGE_SETTINGS_KEY, JSON.stringify({
+            theme: state.theme,
+            category: state.category,
+            sort: state.sort,
+            manualReorder: state.manualReorder
+          }));
+          localStorage.setItem(STORAGE_EVENTS_KEY, JSON.stringify(state.events));
+        } catch (e) {
+          console.warn("Could not save to localStorage", e);
+        }
+      }
 
-    function timerHtml(target) {
-      const parts = msToParts(new Date(target) - Date.now());
-      if (!parts) return `<div class="timer">Completed</div>`;
-      return `
-        <div class="timer">${parts[0]} : ${parts[1]} : ${parts[2]} : ${parts[3]}</div>
-        <div class="labels"><span>Days</span><span>Hours</span><span>Mins</span><span>Secs</span></div>
-      `;
-    }
+      // Theme Application
+      function applyTheme(theme) {
+        state.theme = theme;
+        if (theme === "twilight") {
+          dom.body.classList.add("twilight");
+          dom.btnTwilight.classList.add("active");
+          dom.btnWarm.classList.remove("active");
+        } else {
+          dom.body.classList.remove("twilight");
+          dom.btnWarm.classList.add("active");
+          dom.btnTwilight.classList.remove("active");
+        }
+        savePersistedState();
+      }
 
-    function moveEvent(id, dir) {
-      const index = events.findIndex((e) => e.id === id);
-      if (index < 0) return;
-      const next = index + dir;
-      if (next < 0 || next >= events.length) return;
-      [events[index], events[next]] = [events[next], events[index]];
-      saveState();
-      render();
-    }
+      // Format Date representation
+      function formatEventDate(dateStr) {
+        try {
+          const d = new Date(dateStr);
+          if (isNaN(d.getTime())) return dateStr;
+          return d.toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+          });
+        } catch (e) {
+          return dateStr;
+        }
+      }
 
-    function deleteEvent(id) {
-      events = events.filter((e) => e.id !== id);
-      saveState();
-      render();
-    }
+      // Time breakdown helper
+      function getTimeRemaining(targetDate) {
+        const total = new Date(targetDate).getTime() - Date.now();
+        if (total <= 0) {
+          return { isCompleted: true, total: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
+        }
+        const seconds = Math.floor((total / 1000) % 60);
+        const minutes = Math.floor((total / 1000 / 60) % 60);
+        const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+        const days = Math.floor(total / (1000 * 60 * 60 * 24));
+        return {
+          isCompleted: false,
+          total,
+          days,
+          hours,
+          minutes,
+          seconds
+        };
+      }
 
-    function createCard(event, featured = false) {
-      const card = document.createElement("section");
-      card.className = `event-card glass${featured ? " featured-card" : ""}`;
-      card.innerHTML = `
-        <div class="actions">
-          ${prefs.manual ? `<button class="icon-btn" data-move="up" aria-label="Move up">↑</button><button class="icon-btn" data-move="down" aria-label="Move down">↓</button>` : ""}
-          <button class="icon-btn" data-del="1" aria-label="Delete">🗑</button>
-        </div>
-        <div class="event-head">
-          <div>
-            <h3 class="event-title">${escapeHtml(event.title)}</h3>
-            <div class="event-date">${dateText(event.target)}</div>
+      function pad2(num) {
+        return String(num).padStart(2, "0");
+      }
+
+      // Filter & Sort calculation
+      function getProcessedEvents() {
+        let list = [...state.events];
+
+        // 1. Filter by category
+        if (state.category !== "all") {
+          list = list.filter((item) => item.category === state.category);
+        }
+
+        // 2. Sort unless manual re-order is strictly keeping array order
+        if (!state.manualReorder) {
+          if (state.sort === "closest") {
+            list.sort((a, b) => new Date(a.target) - new Date(b.target));
+          } else if (state.sort === "furthest") {
+            list.sort((a, b) => new Date(b.target) - new Date(a.target));
+          } else if (state.sort === "az") {
+            list.sort((a, b) => a.title.localeCompare(b.title));
+          }
+        }
+
+        return list;
+      }
+
+      // Render Cards
+      function renderDashboard() {
+        const processed = getProcessedEvents();
+        dom.eventsGrid.innerHTML = "";
+
+        if (processed.length === 0) {
+          dom.eventsGrid.classList.remove("has-featured");
+          dom.eventsGrid.innerHTML = `
+            <div class="empty-state glass">
+              <div class="empty-icon">⏳</div>
+              <h3 class="empty-title">No Milestones Found</h3>
+              <p class="empty-desc">No events match the "${escapeHtml(state.category)}" category filter. Click "+ Add Event" to create one.</p>
+            </div>
+          `;
+          return;
+        }
+
+        // Identify featured event (only if explicitly marked as isFeatured)
+        const featuredIndex = processed.findIndex((e) => e.isFeatured);
+
+        if (featuredIndex !== -1) {
+          dom.eventsGrid.classList.add("has-featured");
+          const featuredItem = processed[featuredIndex];
+          const regularItems = processed.filter((_, idx) => idx !== featuredIndex);
+
+          // Render Featured Card first
+          const featuredCard = createCardElement(featuredItem, true);
+          dom.eventsGrid.appendChild(featuredCard);
+
+          // Render Regular Cards
+          regularItems.forEach((item) => {
+            const card = createCardElement(item, false);
+            dom.eventsGrid.appendChild(card);
+          });
+        } else {
+          dom.eventsGrid.classList.remove("has-featured");
+          // No featured card: render all cards cleanly as regular cards
+          processed.forEach((item) => {
+            const card = createCardElement(item, false);
+            dom.eventsGrid.appendChild(card);
+          });
+        }
+      }
+
+      function escapeHtml(str) {
+        return String(str || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      // Create a single card DOM element
+      function createCardElement(item, isFeatured) {
+        const card = document.createElement("article");
+        card.className = `event-card glass ${isFeatured ? "featured" : ""}`;
+        card.setAttribute("data-id", item.id);
+
+        const time = getTimeRemaining(item.target);
+
+        // Header content
+        let headerLeft = "";
+        if (isFeatured) {
+          headerLeft = `
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="featured-label">Featured Event</span>
+              <span class="category-badge ${item.category}">${escapeHtml(item.category)}</span>
+            </div>
+          `;
+        } else {
+          headerLeft = `
+            <span class="category-badge ${item.category}">${escapeHtml(item.category)}</span>
+          `;
+        }
+
+        // Timer HTML
+        let timerContent = "";
+        if (time.isCompleted) {
+          timerContent = `
+            <div class="timer-wrap">
+              <span class="completed-badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Completed
+              </span>
+            </div>
+          `;
+        } else if (isFeatured) {
+          timerContent = `
+            <div class="timer-wrap">
+              <div class="timer-digits">
+                <span class="t-days">${pad2(time.days)}</span>
+                <span class="timer-separator">:</span>
+                <span class="t-hours">${pad2(time.hours)}</span>
+                <span class="timer-separator">:</span>
+                <span class="t-mins">${pad2(time.minutes)}</span>
+                <span class="timer-separator">:</span>
+                <span class="t-secs">${pad2(time.seconds)}</span>
+              </div>
+              <div class="timer-labels">
+                <span style="flex:1">Days</span>
+                <span style="flex:1">Hours</span>
+                <span style="flex:1">Mins</span>
+                <span style="flex:1">Secs</span>
+              </div>
+              ${item.note ? `<div class="featured-note">${escapeHtml(item.note)}</div>` : ""}
+            </div>
+          `;
+        } else {
+          // Smaller cards: show live ticking countdown
+          // If days > 0, show DD:HH:MM:SS or HH:MM:SS
+          const showDays = time.days > 0;
+          timerContent = `
+            <div class="timer-wrap">
+              <div class="timer-digits">
+                ${showDays ? `<span class="t-days">${pad2(time.days)}</span><span class="timer-separator">:</span>` : ""}
+                <span class="t-hours">${pad2(time.hours)}</span>
+                <span class="timer-separator">:</span>
+                <span class="t-mins">${pad2(time.minutes)}</span>
+                <span class="timer-separator">:</span>
+                <span class="t-secs">${pad2(time.seconds)}</span>
+              </div>
+              <div class="timer-labels">
+                ${showDays ? `<span>Days</span>` : ""}
+                <span>Hours</span>
+                <span>Mins</span>
+                <span>Secs</span>
+              </div>
+            </div>
+          `;
+        }
+
+        // Date Display
+        const dateDisplay = item.note && !isFeatured ? escapeHtml(item.note) : formatEventDate(item.target);
+
+        card.innerHTML = `
+          <div class="card-head">
+            ${headerLeft}
+            <div class="card-actions">
+              <!-- Feature pin button -->
+              <button class="btn-feature-star ${item.isFeatured ? "is-featured" : ""}" data-action="feature" title="${item.isFeatured ? "Unpin featured" : "Pin as featured"}">
+                <svg viewBox="0 0 24 24">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </button>
+
+              <!-- Delete Button -->
+              <button class="btn-action-pill" data-action="delete" title="Delete Milestone">
+                <svg viewBox="0 0 24 24">
+                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+                <span>Delete</span>
+              </button>
+
+              <!-- Move Up / Down Buttons (Visible during manual re-order) -->
+              <div class="btn-reorder-group">
+                <button class="btn-move" data-action="move-up" title="Move Up">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="18 15 12 9 6 15"></polyline>
+                  </svg>
+                </button>
+                <button class="btn-move" data-action="move-down" title="Move Down">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
-          <span class="badge ${normalizeCategory(event.category)}">${escapeHtml(normalizeCategory(event.category))}</span>
-        </div>
-        <div>${timerHtml(event.target)}</div>
-      `;
 
-      card.querySelectorAll("[data-move]").forEach((btn) => {
-        btn.addEventListener("click", () => moveEvent(event.id, btn.dataset.move === "up" ? -1 : 1));
-      });
-      card.querySelector("[data-del]").addEventListener("click", () => deleteEvent(event.id));
-      return card;
-    }
+          <div>
+            <h2 class="card-title">${escapeHtml(item.title)}</h2>
+            <div class="card-date">${dateDisplay}</div>
+          </div>
 
-    function render() {
-      const list = filteredEvents();
-      el.cards.innerHTML = "";
-      el.featuredWrap.innerHTML = "";
-      if (!list.length) {
-        const empty = document.createElement("div");
-        empty.className = "empty glass";
-        empty.textContent = "No events for this category yet.";
-        el.cards.appendChild(empty);
-        el.featuredWrap.innerHTML = `<div class="empty">No featured event</div>`;
-      } else {
-        el.featuredWrap.appendChild(createCard(list[0], true));
-        list.slice(1).forEach((event) => el.cards.appendChild(createCard(event)));
+          ${timerContent}
+        `;
+
+        // Event Listeners for card actions
+        const btnDelete = card.querySelector('[data-action="delete"]');
+        btnDelete.addEventListener("click", () => deleteMilestone(item.id));
+
+        const btnFeature = card.querySelector('[data-action="feature"]');
+        btnFeature.addEventListener("click", () => toggleFeatureMilestone(item.id));
+
+        const btnMoveUp = card.querySelector('[data-action="move-up"]');
+        if (btnMoveUp) {
+          btnMoveUp.addEventListener("click", () => moveMilestone(item.id, -1));
+        }
+
+        const btnMoveDown = card.querySelector('[data-action="move-down"]');
+        if (btnMoveDown) {
+          btnMoveDown.addEventListener("click", () => moveMilestone(item.id, 1));
+        }
+
+        return card;
       }
 
-      el.chips.forEach((chip) => chip.classList.toggle("active", chip.dataset.filter === prefs.filter));
-      el.sortSelect.value = prefs.sort;
-      el.manualBtn.classList.toggle("active", prefs.manual);
-      el.addPanel.classList.toggle("active", prefs.showAdd);
-    }
+      // Fast in-place tick update every second without full DOM rebuild
+      function updateLiveTimers() {
+        const cards = dom.eventsGrid.querySelectorAll(".event-card");
+        cards.forEach((card) => {
+          const id = card.getAttribute("data-id");
+          const item = state.events.find((e) => e.id === id);
+          if (!item) return;
 
-    function addEvent() {
-      const title = el.eventTitle.value.trim();
-      const target = el.eventDate.value;
-      const category = normalizeCategory(el.eventCategory.value);
-      if (!title || !target) return;
-      events.push({ id: crypto.randomUUID(), title, target, category });
-      el.eventTitle.value = "";
-      el.eventDate.value = "";
-      prefs.showAdd = false;
-      saveState();
-      render();
-    }
+          const time = getTimeRemaining(item.target);
+          const tDays = card.querySelector(".t-days");
+          const tHours = card.querySelector(".t-hours");
+          const tMins = card.querySelector(".t-mins");
+          const tSecs = card.querySelector(".t-secs");
 
-    function wire() {
-      el.themeToggle.addEventListener("click", () => setTheme(prefs.theme === "warm" ? "twilight" : "warm"));
-      el.sortSelect.addEventListener("change", () => { prefs.sort = el.sortSelect.value; saveState(); render(); });
-      el.chips.forEach((chip) => chip.addEventListener("click", () => { prefs.filter = chip.dataset.filter; saveState(); render(); }));
-      el.manualBtn.addEventListener("click", () => { prefs.manual = !prefs.manual; saveState(); render(); });
-      el.addBtn.addEventListener("click", () => { prefs.showAdd = !prefs.showAdd; saveState(); render(); });
-      el.saveEvent.addEventListener("click", addEvent);
-    }
+          if (time.isCompleted) {
+            const timerWrap = card.querySelector(".timer-wrap");
+            if (timerWrap && !card.querySelector(".completed-badge")) {
+              timerWrap.innerHTML = `
+                <span class="completed-badge">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Completed
+                </span>
+              `;
+            }
+            return;
+          }
 
-    function init() {
-      loadState();
-      setTheme(prefs.theme || "warm");
-      wire();
-      render();
-      setInterval(render, 1000);
-    }
+          if (tDays) tDays.textContent = pad2(time.days);
+          if (tHours) tHours.textContent = pad2(time.hours);
+          if (tMins) tMins.textContent = pad2(time.minutes);
+          if (tSecs) tSecs.textContent = pad2(time.seconds);
+        });
+      }
 
-    init();
+      // Operations
+      function deleteMilestone(id) {
+        state.events = state.events.filter((e) => e.id !== id);
+        savePersistedState();
+        renderDashboard();
+      }
+
+      function toggleFeatureMilestone(id) {
+        state.events = state.events.map((e) => {
+          if (e.id === id) {
+            return { ...e, isFeatured: !e.isFeatured };
+          }
+          return { ...e, isFeatured: false }; // Single featured card
+        });
+        savePersistedState();
+        renderDashboard();
+      }
+
+      function moveMilestone(id, direction) {
+        const idx = state.events.findIndex((e) => e.id === id);
+        if (idx === -1) return;
+        const targetIdx = idx + direction;
+        if (targetIdx < 0 || targetIdx >= state.events.length) return;
+
+        // Swap in array
+        const temp = state.events[idx];
+        state.events[idx] = state.events[targetIdx];
+        state.events[targetIdx] = temp;
+
+        savePersistedState();
+        renderDashboard();
+      }
+
+      // Modal Controls
+      function openModal() {
+        dom.modalOverlay.classList.add("open");
+        // Set default datetime to roughly 30 days from now
+        const now = new Date();
+        now.setDate(now.getDate() + 30);
+        now.setMinutes(0);
+        now.setSeconds(0);
+        const isoString = now.toISOString().slice(0, 16);
+        dom.inputDateTime.value = isoString;
+        dom.inputTitle.focus();
+      }
+
+      function closeModal() {
+        dom.modalOverlay.classList.remove("open");
+        dom.addForm.reset();
+      }
+
+      function handleAddSubmit(e) {
+        e.preventDefault();
+        const title = dom.inputTitle.value.trim();
+        const dateTime = dom.inputDateTime.value;
+        const category = dom.selectCategory.value;
+        const note = dom.inputNote.value.trim();
+
+        if (!title || !dateTime) return;
+
+        const newEvent = {
+          id: "evt-" + Date.now() + "-" + Math.random().toString(36).substr(2, 5),
+          title,
+          category,
+          target: dateTime,
+          note: note || formatEventDate(dateTime),
+          isFeatured: false
+        };
+
+        state.events.unshift(newEvent);
+        savePersistedState();
+        closeModal();
+        renderDashboard();
+      }
+
+      // Wire Up Listeners
+      function initListeners() {
+        // Theme buttons
+        dom.btnWarm.addEventListener("click", () => applyTheme("warm"));
+        dom.btnTwilight.addEventListener("click", () => applyTheme("twilight"));
+
+        // Sort buttons
+        dom.sortButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            dom.sortButtons.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            state.sort = btn.dataset.sort;
+            savePersistedState();
+            renderDashboard();
+          });
+        });
+
+        // Category filter buttons
+        dom.categoryButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            dom.categoryButtons.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            state.category = btn.dataset.category;
+            savePersistedState();
+            renderDashboard();
+          });
+        });
+
+        // Manual Reorder toggle
+        dom.checkManual.addEventListener("change", (e) => {
+          state.manualReorder = e.target.checked;
+          if (state.manualReorder) {
+            dom.body.classList.add("manual-reorder-active");
+          } else {
+            dom.body.classList.remove("manual-reorder-active");
+          }
+          savePersistedState();
+          renderDashboard();
+        });
+
+        // Modal triggers
+        dom.btnOpenAdd.addEventListener("click", openModal);
+        dom.btnCloseModal.addEventListener("click", closeModal);
+        dom.btnCancelModal.addEventListener("click", closeModal);
+        dom.modalOverlay.addEventListener("click", (e) => {
+          if (e.target === dom.modalOverlay) closeModal();
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && dom.modalOverlay.classList.contains("open")) {
+            closeModal();
+          }
+        });
+
+        dom.addForm.addEventListener("submit", handleAddSubmit);
+      }
+
+      // Initialize UI controls based on state
+      function syncUiWithState() {
+        applyTheme(state.theme);
+
+        dom.sortButtons.forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.sort === state.sort);
+        });
+
+        dom.categoryButtons.forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.category === state.category);
+        });
+
+        dom.checkManual.checked = state.manualReorder;
+        if (state.manualReorder) {
+          dom.body.classList.add("manual-reorder-active");
+        } else {
+          dom.body.classList.remove("manual-reorder-active");
+        }
+      }
+
+      // Startup
+      function init() {
+        loadPersistedState();
+        initListeners();
+        syncUiWithState();
+        renderDashboard();
+
+        // 1s interval countdown update
+        setInterval(updateLiveTimers, 1000);
+      }
+
+      init();
+    })();
   </script>
 </body>
 </html>
